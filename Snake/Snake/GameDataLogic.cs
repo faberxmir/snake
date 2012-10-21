@@ -7,5 +7,72 @@ namespace Snake
 {
     class GameDataLogic
     {
+        private int screenWidth { get; set; }
+        private int screenHeight { get; set; }
+        private GameInfoDTO gameInfo;
+
+        public GameDataLogic(int inScrnWidth, int inScrnHeight)
+        {
+            screenWidth = inScrnWidth;
+            screenHeight = inScrnHeight;
+        }
+
+        public GameInfoDTO moveSnakeHorizontal(int posXmodifier)
+        {
+            if (0 <= newPosX && screenWidth >= newPosX)
+            {
+                //updateposX
+            }
+            else
+            {
+               // gameInfo.setGameOver(true);
+            }
+
+            return gameInfo;
+        }
+        public GameInfoDTO moveSnakeVertical(int posYmodifier)
+        {
+            if (0 <= newPosY && screenWidth >= newPosY)
+            {
+                Coord newCoord = gameInfo.getSnakePart(0);
+                newCoord.posY += posYmodifier;
+                if (0 < newCoord.posY && screenWidth > newCoord.posY)
+                {
+                    GameInfoDTO.snake = GameInfoDTO.snake.grow(newCoord);
+                }
+            }
+            else
+            {
+                // gameInfo.setGameOver(true);
+            }
+            return gameInfo;
+        }
+
+        private Boolean didHitApple(Coord checkCoord)
+        {
+            Boolean hitApple = false;
+            if (gameInfo.getAppleX() == checkCoord.X && gameInfo.getAppleY() == Coord.Y)
+            {
+                growSnake(checkCoord);
+            }
+          
+            return hitApple;
+        }
+
+        private Boolean snakeHitSelf()
+        {
+            Boolean hitSelf = false;
+            do( ) 
+            return hitSelf;
+        }
+
+        private void growSnake(Coord newFrontCoord)
+        {
+            // GameInfoDTO.setSnake(gameInfo.getSnake().grow(checkCoord));
+        }
+
+        private void setApplePos()
+        {
+        }
     }
 }
