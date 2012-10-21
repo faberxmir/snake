@@ -63,7 +63,6 @@ namespace Snake
             {
                 GameInfoDTO.setGameOver(true);
             }
-
         }
         private void checkAppleHit(Coord checkCoord)
         {
