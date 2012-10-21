@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Snake
 {
-    class GameBoard
+    class GameDataLogic
     {
     }
 }
