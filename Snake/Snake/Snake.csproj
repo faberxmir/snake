@@ -44,7 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Coord.cs" />
-    <Compile Include="GameBoard.cs" />
+    <Compile Include="GameDataLogic.cs" />
     <Compile Include="GameController.cs" />
     <Compile Include="GameInfoDTO.cs" />
     <Compile Include="Game.cs" />
