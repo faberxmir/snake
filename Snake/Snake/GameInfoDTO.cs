@@ -37,11 +37,20 @@ namespace Snake {
         }
 
         public Coord getSnakeCoord(int listPosition) {
+<<<<<<< HEAD
             return snake.get(listPosition);
         }
 
         public Coord getAppleCoord(int listPosition) {
             return apple.get(listPosition);
+=======
+            return snake[listPosition];
+        }
+
+        public void setAppleCoord(Coord c) {
+            apple.X = c.X;
+            apple.Y = c.Y;
+>>>>>>> origin/krystahBranch
         }
 
     }
