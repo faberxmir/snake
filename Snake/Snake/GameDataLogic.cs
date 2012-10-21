@@ -10,11 +10,13 @@ namespace Snake
         private int screenWidth { get; set; }
         private int screenHeight { get; set; }
         private GameInfoDTO gameInfo;
+        private Snake snake;
 
         public GameDataLogic(int inScrnWidth, int inScrnHeight)
         {
             screenWidth = inScrnWidth;
             screenHeight = inScrnHeight;
+            snake = new Snake();
         }
 
         public GameInfoDTO moveSnakeHorizontal(int posXmodifier)
@@ -32,7 +34,7 @@ namespace Snake
         }
         public GameInfoDTO moveSnakeVertical(int posYmodifier)
         {
-            if (0 <= newPosY && screenWidth >= newPosY)
+            if (0 <= posYmodifier && screenWidth >= posYmodifier)
             {
                 Coord newCoord = gameInfo.getSnakePart(0);
                 newCoord.posY += posYmodifier;
