@@ -9,7 +9,6 @@ namespace Snake
     {
         private int screenWidth { get; set; }
         private int screenHeight { get; set; }
-        private GameInfoDTO gameInfo;
         private Snake snake;
 
         public GameDataLogic(int inScrnWidth, int inScrnHeight)
@@ -21,9 +20,10 @@ namespace Snake
 
         public GameInfoDTO moveSnakeHorizontal(int posXmodifier)
         {
+            Coord newCoord = snake.getSnakePart(0);
             if (0 <= newPosX && screenWidth >= newPosX)
             {
-                //updateposX
+
             }
             else
             {
@@ -40,7 +40,7 @@ namespace Snake
                 newCoord.posY += posYmodifier;
                 if (0 < newCoord.posY && screenWidth > newCoord.posY)
                 {
-                    GameInfoDTO.snake = GameInfoDTO.snake.grow(newCoord);
+                   // GameInfoDTO.snake = GameInfoDTO.snake.grow(newCoord);
                 }
             }
             else
@@ -74,5 +74,9 @@ namespace Snake
         private void setApplePos()
         {
         }
+        private void getSnakeHeadCoord()
+        {
+        }
+
     }
 }
