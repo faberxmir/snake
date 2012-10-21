@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Snake
 {
-    class Game
+    class GameView
     {
         static void Main(string[] args)
         {
