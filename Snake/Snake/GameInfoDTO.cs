@@ -14,7 +14,7 @@ namespace Snake {
 
         public GameInfoDTO() { }
 
-        public GameInfoDTO() {
+        public GameInfoDTO(List<Coord> snake, Coord apple) {
             gameOver = false;
             snake = new List<Coord>();
             apple = new Coord();
