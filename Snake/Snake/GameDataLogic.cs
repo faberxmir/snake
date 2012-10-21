@@ -24,27 +24,24 @@ namespace Snake
         {
             Coord newMove = snake.getSnakeHead();
             newMove.posX += posXmodifier;
-            if (0 <= newMove.posX && screenWidth >= newMove.posX)
-            {
-   
-            }
-            else
-            {
-                gameInfo.setGameOver(true);
-            }
 
-            return gameInfo;
+            return move(newMove);
         }
         public GameInfoDTO moveSnakeVertical(int posYmodifier)
         {
-            if (0 <= posYmodifier && screenWidth >= posYmodifier)
+            Coord newMove = snake.getHead();
+            newMove.posY += posYmodifier;
+
+            return move(newMove);
+        }
+
+        private GameInfoDTO move(Coord newMove)
+        {
+            GameInfoDTO gameInfo = new GameInfoDTO(snake, apple);
+            if (!crashing(newMove))
             {
-                Coord newMove = gameInfo.getSnakePart(0);
-                newMove.posY += posYmodifier;
-                if (0 < newMove.posY && screenWidth > newMove.posY)
-                {
-                   // GameInfoDTO.snake = GameInfoDTO.snake.grow(newCoord);
-                }
+                checkAppleHit(newMove);
+                gameInfo.setSnake(snake);//TODO: Snake is set twice, surely this can be done with more grace
             }
             else
             {
@@ -52,44 +49,41 @@ namespace Snake
             }
             return gameInfo;
         }
-        private void move(Coord newMove)
+        private void checkAppleHit(Coord newCoord)
         {
-
-            if (!snakeHitSelf(newMove))
+            if (apple.posX == newCoord.posX && apple.posX == newCoord.posX)
             {
-                checkAppleHit(newMove);
-            }
-            else
-            {
-                GameInfoDTO.setGameOver(true);
+                snake.grow();
+                setApplePos();
             }
         }
-        private void checkAppleHit(Coord checkCoord)
+
+        private void setApplePos()
         {
-            Boolean hitApple = false;
-            if (gameInfo.getAppleX() == checkCoord.X && gameInfo.getAppleY() == Coord.Y)
+            Random random = new Random();
+            int newAppleY = random.Next(0, screenHeight);
+            int newAppleX = random.Next(0, screenWidth);
+            apple.posY = newAppleY;
+            apple.posX = newAppleX;
+        }
+
+        private Boolean crashing(Coord newMove)
+        {
+            int x = newMove.posX;
+            int y = newMove.posY;
+
+            if (0 < y && 0 < x &&
+                y < screenWidth && x < screenHeight && 
+                !snakeHitSelf(newMove))
             {
-                growSnake(checkCoord);
+                return false;
             }
+            return true;
         }
 
         private Boolean snakeHitSelf(Coord newMove)
         {
             return snake.hasCoord(newMove);
         }
-
-        private void growSnake(Coord newFrontCoord)
-        {
-            
-        }
-
-        private Coord setApplePos()
-        {
-        }
-        private void updateSnakeBody(Coord newMove)
-        {
-            snake.grow(newMove);
-        }
-
     }
 }
