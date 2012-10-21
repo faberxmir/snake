@@ -19,14 +19,14 @@ namespace Snake
         {
             setupSnake();
         }
-
-        public List<Coord> getBodyPosition(Coord coord)
+        
+        // Henter hele posisjonen for slangen
+        public List<Coord> getBodyPosition()
         {
-            int pos = snake.IndexOf(coord);
-
-            return pos;
+            return snake;
         }
 
+        // Sjekker om slangen har koordinater
         public bool hasCoord(Coord coord)
         {
             foreach (Coord i in snake)
@@ -39,11 +39,12 @@ namespace Snake
             return false;
         }
 
+        // Setter opp slangen første gang i hver runde
         public void setupSnake()
         {
             // Initialiserer
             Coord coord = new Coord(10, 10);
-            List<Coord> snake = new List<Coord>();
+            snake = new List<Coord>();
 
             // Legger til slangen
             snake.Add(coord);
@@ -52,24 +53,32 @@ namespace Snake
             snake.Add(coord);
         }
 
-        public void moveToCoord(Coord nextCoord)
+        // Oppdaterer posisjonen til y-aksen
+        public void updatePosY(int newPosY)
+        {
+               
+        }
+
+        // Legger til et ledd i slangen etter ett eple er tatt
+        public List<Coord> addToCoord(Coord nextCoord)
         {
             if (snake != null)
             {
                 snake.Add(nextCoord);
             }
+            return snake;
         }
 
+        // Henter posisjonen til slangekroppen
         public List<Coord> getSnakeBody(Coord coord)
         {
-            int snakeBody = 1;
-            return coord;
+            return snake;
         }
 
-        public int getSnakeHead()
+        // Henter posisjonen til slangehodet
+        public Coord getSnakeHead()
         {
-            int snakeHead = snake.IndexOf(snake.First());
-            return snakeHead;
+            return snake.Last();
         }
     }
 }
