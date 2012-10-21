@@ -48,15 +48,13 @@ namespace Snake
             return gameInfo;
         }
 
-        private Boolean didHitApple(Coord checkCoord)
+        private void checkAppleHit(Coord checkCoord)
         {
             Boolean hitApple = false;
             if (gameInfo.getAppleX() == checkCoord.X && gameInfo.getAppleY() == Coord.Y)
             {
                 growSnake(checkCoord);
             }
-          
-            return hitApple;
         }
 
         private Boolean snakeHitSelf()
