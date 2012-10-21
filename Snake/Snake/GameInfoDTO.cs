@@ -37,11 +37,12 @@ namespace Snake {
         }
 
         public Coord getSnakeCoord(int listPosition) {
-            return snake.get(listPosition);
+            return snake[listPosition];
         }
 
-        public Coord getAppleCoord(int listPosition) {
-            return apple.get(listPosition);
+        public void setAppleCoord(Coord c) {
+            apple.X = c.X;
+            apple.Y = c.Y;
         }
 
     }
