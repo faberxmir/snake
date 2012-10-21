@@ -26,6 +26,14 @@ namespace Snake
             return snake;
         }
 
+        public List<Coord> moveSnake(Coord coord)
+        {
+            for (int i = 0; i < snake.Count -1; ++i)
+            {
+                snake = snake[i] + 1;
+            }
+        }
+
         // Sjekker om slangen har koordinater
         public bool hasCoord(Coord coord)
         {
@@ -53,14 +61,8 @@ namespace Snake
             snake.Add(coord);
         }
 
-        // Oppdaterer posisjonen til y-aksen
-        public void updatePosY(int newPosY)
-        {
-               
-        }
-
         // Legger til et ledd i slangen etter ett eple er tatt
-        public List<Coord> addToCoord(Coord nextCoord)
+        public List<Coord> growSnake(Coord nextCoord)
         {
             if (snake != null)
             {
