@@ -5,69 +5,71 @@ using System.Text;
 
 namespace Snake
 {
-    class Snake:List<Coord>
+    class Snake : List<Coord>
     {
-        
-        public Coord tail, head, newHead;
-        Random random;
         List<Coord> snake;
-        GameDataLogic gdl;
+
+        private static readonly int SNAKEHEAD = 0;
+
+        public Snake()
+        { }
 
         // Konstruktør
         public Snake()
         {
-            setupSnake(coord);
+            setupSnake();
         }
 
-
-        public List<Coord> bodyPostition()
+        public List<Coord> getBodyPosition(Coord coord)
         {
-            return 0;
+            int pos = snake.IndexOf(coord);
+
+            return pos;
         }
 
-        void grow(int x, int y)
-        { 
-            
-        }
-
-        public Coord updatePosition(Coord)
+        public bool hasCoord(Coord coord)
         {
-            return 0;
-        }
-
-        public void getBodyPosition()
-        {
-        
-        }
-
-        public bool hasCoord()
-        {
+            foreach (Coord i in snake)
+            {
+                if (i.Equals(coord))
+                {
+                    return true;
+                }
+            }
             return false;
         }
 
-        public Coord setupSnake(Coord coord)
+        public void setupSnake()
         {
-
             // Initialiserer
-            random = new Random();
-            coord = new Coord(10,10);
-            
-            snake = new List<Coord>();
+            Coord coord = new Coord(10, 10);
+            List<Coord> snake = new List<Coord>();
 
             // Legger til slangen
             snake.Add(coord);
             snake.Add(coord);
             snake.Add(coord);
             snake.Add(coord);
+        }
 
-            tail = new Coord(snake.First());
-            head = new Coord(snake.Last());
-            newHead = new Coord(head);
-
-            if (!gg)
+        public void moveToCoord(Coord nextCoord)
+        {
+            if (snake != null)
             {
-                snake.Add(newHead);
+                snake.Add(nextCoord);
             }
+        }
+
+        public List<Coord> getSnakeBody(Coord coord)
+        {
+            int snakeBody = 1;
+            return coord;
+        }
+
+        public int getSnakeHead()
+        {
+            int snakeHead = snake.IndexOf(snake.First());
+            return snakeHead;
         }
     }
 }
