@@ -7,7 +7,7 @@ namespace Snake {
 
     class GameController {
 
-        GameDataLogic gdl;
+        private GameDataLogic gdl;
 
         public GameController(int scrnWidth, int scrnHeight) {
             gdl = new GameDataLogic(scrnWidth, scrnHeight);
