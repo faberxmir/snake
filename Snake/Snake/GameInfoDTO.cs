@@ -3,9 +3,46 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Snake
-{
-    class GameInfoDTO
-    {
+namespace Snake {
+
+    class GameInfoDTO {
+
+        private bool gameOver { get; set; }
+		private List<Coord> snake;
+        private Coord apple;
+        Random random = new Random();
+
+        public GameInfoDTO() { }
+
+        public GameInfoDTO() {
+            gameOver = false;
+            snake = new List<Coord>();
+            apple = new Coord();
+        }
+
+		public List<Coord> getSnake(){
+			return snake;
+		}
+
+        public Coord getApple() {
+            return apple;
+        }
+
+        public int getAppleX() {
+            return apple.X;
+        }
+
+        public int getAppleY() {
+            return apple.Y;
+        }
+
+        public Coord getSnakeCoord(int listPosition) {
+            return snake.get(listPosition);
+        }
+
+        public Coord getAppleCoord(int listPosition) {
+            return apple.get(listPosition);
+        }
+
     }
 }
