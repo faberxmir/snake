@@ -7,27 +7,26 @@ namespace Snake {
 
     class GameController {
 
-        private GameDataLogic gdl;
+        private GameDataLogic implementedLogic;
 
         public GameController() 
         {
+            implementedLogic = new GameDataLogic();
         }
 
-        public void VerticalMovement(int posY)
+        public GameInfoDTO VerticalMovement(int posY)
         {
-            gdl.moveSnakeVertical(posY);
+           return implementedLogic.moveSnakeVertical(posY);
         }
 
-        public  void HorizontalMovement(int posX)
+        public GameInfoDTO HorizontalMovement(int posX)
         {
-            gdl.moveSnakeHorizontal(posX);
+           return implementedLogic.moveSnakeHorizontal(posX);
         }
-
-        public GameInfoDTO transferScreenSize(int scrnWidth, int scrnHeight)
+        public GameInfoDTO initiate(int snakeSize, int screenWidth, int screenHeight)
         {
-            gdl = new GameDataLogic(scrnWidth, scrnHeight);
-            return gdl.init();
-
+           GameInfoDTO returnInfo = implementedLogic.initiate(snakeSize, screenWidth, screenHeight);
+           return returnInfo;
         }
 
     }

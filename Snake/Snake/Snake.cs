@@ -7,36 +7,49 @@ namespace Snake
 {
     class Snake : List<Coord>
     {
+<<<<<<< HEAD
         List<Coord> snake;
 
         private static readonly int SNAKEHEAD = 0;
 
+=======
+        private List<Coord> snake;
+        private readonly static int TRAILCOMPENSATOR = 1;
+        public int Count { get; set; }
+>>>>>>> origin/Faber
         // Konstruktør
-        public Snake()
+        public Snake(int snakeSize)
         {
-            setupSnake();
+            setupSnake(snakeSize + TRAILCOMPENSATOR);
         }
         
         // Henter hele posisjonen for slangen
-        public List<Coord> getBodyPosition()
+        public Coord getBodyPosition(int i)
         {
-            return snake;
+            Coord returnCoord = new Coord(-1, -1);
+            if (i < snake.Count)
+            {
+                returnCoord = snake[i];
+            }
+            return returnCoord;
         }
 
         public List<Coord> moveSnake(Coord coord)
         {
             for (int i = 0; i < snake.Count -1; ++i)
             {
-                snake = snake[i] + 1;
+                snake[i] = snake[i + 1];
             }
+            snake[snake.Count - 1] =  coord;
+            return snake;
         }
 
         // Sjekker om slangen har koordinater
         public bool hasCoord(Coord coord)
         {
-            foreach (Coord i in snake)
+            foreach (Coord c in snake)
             {
-                if (i.Equals(coord))
+                if (c.Equals(coord))
                 {
                     return true;
                 }
@@ -45,17 +58,21 @@ namespace Snake
         }
 
         // Setter opp slangen første gang i hver runde
-        public void setupSnake()
+        public void setupSnake(int initSnakeSize)
         {
             // Initialiserer
             Coord coord = new Coord(10, 10);
             snake = new List<Coord>();
 
-            // Legger til slangen
-            snake.Add(coord);
-            snake.Add(coord);
-            snake.Add(coord);
-            snake.Add(coord);
+            if (initSnakeSize > 0)
+            {
+                // Legger til slangen
+                for (int i = 0; i < initSnakeSize; ++i)
+                {
+                    snake.Add(coord);
+                }
+            }
+            Count = snake.Count;
         }
 
         // Legger til et ledd i slangen etter ett eple er tatt
@@ -63,13 +80,14 @@ namespace Snake
         {
             if (snake != null)
             {
-                snake.Add(nextCoord);
+                snake.Insert(0, nextCoord);
             }
+            Count = snake.Count;
             return snake;
         }
 
         // Henter posisjonen til slangekroppen
-        public List<Coord> getSnakeBody(Coord coord)
+        public List<Coord> getSnake()
         {
             return snake;
         }
@@ -77,7 +95,12 @@ namespace Snake
         // Henter posisjonen til slangehodet
         public Coord getSnakeHead()
         {
-            return snake.Last();
+            return snake[snake.Count - 1];
+        }
+
+        public Coord getSnakeTrail()
+        {
+            return snake[Count - 1];
         }
     }
 }
