@@ -9,11 +9,6 @@ namespace Snake
     {
         List<Coord> snake;
 
-        private static readonly int SNAKEHEAD = 0;
-
-        public Snake()
-        { }
-
         // Konstruktør
         public Snake()
         {
@@ -21,25 +16,32 @@ namespace Snake
         }
         
         // Henter hele posisjonen for slangen
-        public List<Coord> getBodyPosition()
+        public Coord getBodyPosition(int i)
         {
-            return snake;
+            Coord returnCoord = new Coord(-1, -1);
+            if (i < snake.Count)
+            {
+                returnCoord = snake[i];
+            }
+            return returnCoord;
         }
 
         public List<Coord> moveSnake(Coord coord)
         {
             for (int i = 0; i < snake.Count -1; ++i)
             {
-                snake = snake[i] + 1;
+                snake[i] = snake[i + 1];
             }
+            snake.Insert(snake.Count - 1, coord);
+            return snake;
         }
 
         // Sjekker om slangen har koordinater
         public bool hasCoord(Coord coord)
         {
-            foreach (Coord i in snake)
+            foreach (Coord c in snake)
             {
-                if (i.Equals(coord))
+                if (c.Equals(coord))
                 {
                     return true;
                 }

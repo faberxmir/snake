@@ -7,42 +7,51 @@ namespace Snake {
 
     class GameInfoDTO {
 
-        private bool gameOver { get; set; }
+        public bool gameOver { get; set; }
 		private List<Coord> snake;
         private Coord apple;
-        Random random = new Random();
 
         public GameInfoDTO() { }
 
-        public GameInfoDTO(List<Coord> snake, Coord apple) {
+        public GameInfoDTO(List<Coord> snake, Coord apple) 
+        {
             gameOver = false;
             snake = new List<Coord>();
             apple = new Coord();
         }
 
-		public List<Coord> getSnake(){
+		public List<Coord> getSnake()
+        {
 			return snake;
 		}
-
-        public Coord getApple() {
+        public void setSnake(List<Coord> inSnake)
+        {
+            snake = inSnake;
+        }
+        public Coord getApple()
+        {
             return apple;
         }
 
-        public int getAppleX() {
-            return apple.X;
+        public int getAppleX() 
+        {
+            return apple.posX;
         }
 
-        public int getAppleY() {
-            return apple.Y;
+        public int getAppleY()
+        {
+            return apple.posY;
         }
 
-        public Coord getSnakeCoord(int listPosition) {
+        public Coord getSnakeCoord(int listPosition)
+        {
             return snake[listPosition];
         }
 
-        public void setAppleCoord(Coord c) {
-            apple.X = c.X;
-            apple.Y = c.Y;
+        public void setAppleCoord(Coord appleCoord) 
+        {
+            apple.posX = appleCoord.posX;
+            apple.posY = appleCoord.posY;
         }
 
     }
