@@ -11,9 +11,6 @@ namespace Snake
 
         private static readonly int SNAKEHEAD = 0;
 
-        public Snake()
-        { }
-
         // Konstruktør
         public Snake()
         {
