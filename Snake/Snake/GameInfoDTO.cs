@@ -13,21 +13,23 @@ namespace Snake {
 
         public GameInfoDTO() { }
 
-        public GameInfoDTO(List<Coord> snake, Coord apple) 
+        public GameInfoDTO(List<Coord> inSnake, Coord inApple) 
         {
             gameOver = false;
-            snake = new List<Coord>();
-            apple = new Coord();
+            snake = inSnake;
+            apple = inApple;
         }
 
 		public List<Coord> getSnake()
         {
 			return snake;
 		}
+
         public void setSnake(List<Coord> inSnake)
         {
             snake = inSnake;
         }
+
         public Coord getApple()
         {
             return apple;

@@ -11,21 +11,23 @@ namespace Snake {
 
         public GameController() 
         {
-            implementedLogic = new GameDataLogic(screenWidth, screenHeight)
+            implementedLogic = new GameDataLogic();
         }
 
-        public void VerticalMovement(int posY)
+        public GameInfoDTO VerticalMovement(int posY)
         {
-            implementedLogic.moveSnakeVertical(posY);
+           return implementedLogic.moveSnakeVertical(posY);
         }
 
-        public  void HorizontalMovement(int posX)
+        public GameInfoDTO HorizontalMovement(int posX)
         {
-            implementedLogic.moveSnakeHorizontal(posX);
+           return implementedLogic.moveSnakeHorizontal(posX);
         }
-        public GameInfoDTO init(int screenWidth, int screenHeight)
+        public GameInfoDTO initiate(int snakeSize, int screenWidth, int screenHeight)
         {
-           return implementedLogic.init(screenWidth, screenHeight);
+           GameInfoDTO returnInfo = implementedLogic.initiate(snakeSize, screenWidth, screenHeight);
+           return returnInfo;
         }
+
     }
 }

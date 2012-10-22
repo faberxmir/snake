@@ -7,12 +7,13 @@ namespace Snake
 {
     class Snake : List<Coord>
     {
-        List<Coord> snake;
-
+        private List<Coord> snake;
+        private readonly static int TRAILCOMPENSATOR = 1;
+        public int Count { get; set; }
         // Konstruktør
-        public Snake()
+        public Snake(int snakeSize)
         {
-            setupSnake();
+            setupSnake(snakeSize + TRAILCOMPENSATOR);
         }
         
         // Henter hele posisjonen for slangen
@@ -32,7 +33,7 @@ namespace Snake
             {
                 snake[i] = snake[i + 1];
             }
-            snake.Insert(snake.Count - 1, coord);
+            snake[snake.Count - 1] =  coord;
             return snake;
         }
 
@@ -50,17 +51,21 @@ namespace Snake
         }
 
         // Setter opp slangen første gang i hver runde
-        public void setupSnake()
+        public void setupSnake(int initSnakeSize)
         {
             // Initialiserer
             Coord coord = new Coord(10, 10);
             snake = new List<Coord>();
 
-            // Legger til slangen
-            snake.Add(coord);
-            snake.Add(coord);
-            snake.Add(coord);
-            snake.Add(coord);
+            if (initSnakeSize > 0)
+            {
+                // Legger til slangen
+                for (int i = 0; i < initSnakeSize; ++i)
+                {
+                    snake.Add(coord);
+                }
+            }
+            Count = snake.Count;
         }
 
         // Legger til et ledd i slangen etter ett eple er tatt
@@ -68,13 +73,14 @@ namespace Snake
         {
             if (snake != null)
             {
-                snake.Add(nextCoord);
+                snake.Insert(0, nextCoord);
             }
+            Count = snake.Count;
             return snake;
         }
 
         // Henter posisjonen til slangekroppen
-        public List<Coord> getSnakeBody(Coord coord)
+        public List<Coord> getSnake()
         {
             return snake;
         }
@@ -82,7 +88,12 @@ namespace Snake
         // Henter posisjonen til slangehodet
         public Coord getSnakeHead()
         {
-            return snake.Last();
+            return snake[snake.Count - 1];
+        }
+
+        public Coord getSnakeTrail()
+        {
+            return snake[Count - 1];
         }
     }
 }

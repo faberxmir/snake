@@ -11,14 +11,19 @@ namespace Snake
         private int screenHeight { get; set; }
         private Snake snake;
         private Coord apple;
+        private GameInfoDTO gameInfo;
 
         public GameDataLogic()
         {
-            snake = new Snake();
-            setApplePos();
         }
-        public GameInfoDTO init(int inScrnWidth, int inScrnHeight)
+        public GameInfoDTO initiate(int snakeSize, int inScrnWidth, int inScrnHeight)
         {
+            screenWidth = inScrnWidth;
+            screenHeight = inScrnHeight;
+            snake = new Snake(snakeSize);
+            setApplePos();
+            gameInfo = new GameInfoDTO(snake.getSnake(), apple);
+            return gameInfo;
         }
 
         public GameInfoDTO moveSnakeHorizontal(int posXmodifier)
@@ -28,6 +33,7 @@ namespace Snake
 
             return move(newMove);
         }
+
         public GameInfoDTO moveSnakeVertical(int posYmodifier)
         {
             Coord newMove = snake.getSnakeHead();
@@ -38,11 +44,11 @@ namespace Snake
 
         private GameInfoDTO move(Coord newMove)
         {
-            GameInfoDTO gameInfo = new GameInfoDTO(snake, apple);
             if (!crashing(newMove))
             {
                 checkAppleHit(newMove);
-                gameInfo.setSnake(snake);//TODO: Snake is set twice, surely this can be done with more grace
+                snake.moveSnake(newMove);
+                gameInfo.setSnake(snake.getSnake());//TODO: Snake is set twice, surely this can be done with more grace
             }
             else
             {
@@ -52,20 +58,27 @@ namespace Snake
         }
         private void checkAppleHit(Coord newCoord)
         {
-            if (apple.posX == newCoord.posX && apple.posX == newCoord.posX)
+            Coord snakeHead = snake.getSnakeHead();
+
+            if (apple.Equals(snakeHead))
             {
                 snake.growSnake(newCoord);
                 setApplePos();
+                gameInfo.setAppleCoord(apple);
             }
         }
 
         private void setApplePos()
         {
             Random random = new Random();
-            int newAppleY = random.Next(0, screenHeight);
-            int newAppleX = random.Next(0, screenWidth);
-            apple.posY = newAppleY;
-            apple.posX = newAppleX;
+            do
+            {
+                int newAppleY = random.Next(0, screenHeight);
+                int newAppleX = random.Next(0, screenWidth);
+                apple.posY = newAppleY;
+                apple.posX = newAppleX;
+          
+            } while (snake.hasCoord(apple));
         }
 
         private Boolean crashing(Coord newMove)
@@ -73,8 +86,8 @@ namespace Snake
             int x = newMove.posX;
             int y = newMove.posY;
 
-            if (0 < y && 0 < x &&
-                y < screenWidth && x < screenHeight && 
+            if (0 <= y && 0 <= x &&
+                x < screenWidth && y < screenHeight && 
                 !snakeHitSelf(newMove))
             {
                 return false;
